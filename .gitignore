@@ -1,0 +1,6 @@
+.idea/
+*.pyd
+*.pyc
+*.egg-info/
+build/
+graphql/*.c
