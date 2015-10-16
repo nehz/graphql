@@ -3,4 +3,5 @@
 *.pyc
 *.egg-info/
 build/
+dist/
 graphql/*.c
