@@ -1,7 +1,7 @@
 Python GraphQL
 =====================
 
-Uses for `libgraphqlparser <https://github.com/graphql/libgraphqlparser>`_
+Uses `libgraphqlparser <https://github.com/graphql/libgraphqlparser>`_
 
 
 Installation
