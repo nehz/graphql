@@ -1,37 +1,24 @@
 # -*- coding: utf-8 -*-
 
-cdef extern from 'c/GraphQLAstNode.h':
-    struct GraphQLAstNode
-    void graphql_node_free(GraphQLAstNode* node)
+from libcpp.memory cimport unique_ptr
+from graphql_ast cimport Node, visit_document
 
-cdef extern from 'c/GraphQLParser.h':
-    GraphQLAstNode* graphql_parse_string(char* text, char** error)
+
+cdef extern from 'GraphQLParser.h' namespace 'facebook::graphql':
+    unique_ptr[Node] parseString(const char *text, char **error)
 
 
 class GraphQLError(Exception):
     pass
 
 
-cdef class AstNode:
-    cdef GraphQLAstNode* ptr
-
-    @staticmethod
-    cdef create(GraphQLAstNode* ptr):
-        ast_node = AstNode()
-        ast_node.ptr = ptr
-        return ast_node
-
-    def __dealloc__(self):
-        graphql_node_free(self.ptr)
-
-
 def parse(query):
     query = query.encode('utf8')
-    cdef char* c_query = query
-    cdef const char* c_err = NULL
-    cdef GraphQLAstNode* ast = graphql_parse_string(c_query, &c_err)
+    cdef char *c_query = query
+    cdef const char *c_err = NULL
+    cdef Node *ast = parseString(c_query, &c_err).release()
     if not ast:
         if not c_err:
             raise GraphQLError('Unknown error')
         raise GraphQLError(c_err.decode('utf-8'))
-    return AstNode.create(ast)
+    return visit_document(ast)

@@ -1,6 +1,7 @@
 .idea/
 *.pyd
 *.pyc
+*.cpp
 *.egg-info/
 build/
 dist/
