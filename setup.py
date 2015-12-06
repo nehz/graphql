@@ -22,7 +22,8 @@ setup(
         Extension('graphql_ext',
                   sources=sources + ['graphql/graphql_ext.pyx'],
                   include_dirs=include_dirs, depends=depends,
-                  language='c++'),
+                  language='c++',
+                  extra_compile_args=['-std=c++11']),
     ],
     install_requires=[
         'Cython < 1'
