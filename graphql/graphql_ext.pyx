@@ -16,7 +16,7 @@ def parse(query):
     query = query.encode('utf8')
     cdef char *c_query = query
     cdef const char *c_err = NULL
-    cdef Node *ast = parseString(c_query, &c_err).release()
+    cdef Node *ast = parseString(c_query, &c_err).get()
     if not ast:
         if not c_err:
             raise GraphQLError('Unknown error')
