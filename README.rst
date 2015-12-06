@@ -9,6 +9,7 @@ Installation
 
 ::
 
+    pip install cython
     pip install graphql
 
 
