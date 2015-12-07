@@ -17,7 +17,8 @@ depends = [
 
 setup(
     name='graphql',
-    version='0.0.2',
+    version='0.0.3',
+    url='https://github.com/nehz/graphql',
     ext_modules=[
         Extension('graphql_ext',
                   sources=sources + ['graphql/graphql_ext.pyx'],
