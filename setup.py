@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
-from Cython.Distutils.extension import Extension
+from distutils.core import setup
+from distutils.extension import Extension
+from Cython.Distutils import build_ext
 
 include_dirs = ['lib', 'lib/libgraphqlparser', 'lib/gen', 'lib/gen/cython']
 sources = [
@@ -27,6 +29,7 @@ setup(
                   language='c++',
                   extra_compile_args=['-std=c++11']),
     ],
+    cmdclass= {'build_ext': build_ext},
     install_requires=[
         'Cython < 1'
     ],
